@@ -1,0 +1,34 @@
+{
+    "name": "presh/php-evm-toolkit",
+    "description": "Low-level EVM utilities for PHP — RLP encoding, EIP-155 transaction signing, ABI codec, contract deployment, and on-chain payment verification. No web3 library required.",
+    "type": "library",
+    "keywords": ["ethereum", "evm", "bsc", "polygon", "rlp", "eip-155", "erc20", "blockchain", "php"],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "furqansiddiqui/ecdsa-php": "^0.3.5",
+        "furqansiddiqui/ethereum-php": "^0.2.5",
+        "comely-io/buffer-php": "^0.1.17"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "suggest": {
+        "ext-gmp": "Arbitrary-precision math for token amounts beyond PHP's integer range (bcmath is used as a fallback)",
+        "ext-bcmath": "Fallback arbitrary-precision math if ext-gmp is unavailable"
+    },
+    "autoload": {
+        "files": [
+            "src/EvmHelpers.php",
+            "src/ChainScanner.php"
+        ]
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
