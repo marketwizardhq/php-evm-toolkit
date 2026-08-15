@@ -1,5 +1,9 @@
 # PHP EVM Toolkit
 
+[![tests](https://github.com/marketwizardhq/php-evm-toolkit/actions/workflows/tests.yml/badge.svg)](https://github.com/marketwizardhq/php-evm-toolkit/actions/workflows/tests.yml)
+[![PHP 8.1+](https://img.shields.io/badge/php-8.1%2B-777bb4)](https://www.php.net/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 Low-level Ethereum/EVM utilities for PHP, written from scratch — **no web3 library, no ethers, no Composer dependencies** beyond a secp256k1 signer and a Keccak implementation.
 
 Built while shipping a production crypto wallet platform, where shared hosting ruled out running a Node/Geth process and the available PHP web3 wrappers were either abandoned or too heavy. Everything here is the part that had to be written by hand.
