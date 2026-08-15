@@ -4,9 +4,9 @@
 [![PHP 8.1+](https://img.shields.io/badge/php-8.1%2B-777bb4)](https://www.php.net/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-Low-level Ethereum/EVM utilities for PHP, written from scratch — **no web3 library, no ethers, no Composer dependencies** beyond a secp256k1 signer and a Keccak implementation.
+Low-level Ethereum/EVM utilities for PHP with **no web3 library**. RLP encoding, EIP-155 transaction signing, the ABI codec and contract-address derivation are implemented here directly; the only runtime dependencies are the three cryptographic/byte primitives worth not writing by hand (secp256k1, Keccak-256, and a byte buffer).
 
-Built while shipping a production crypto wallet platform, where shared hosting ruled out running a Node/Geth process and the available PHP web3 wrappers were either abandoned or too heavy. Everything here is the part that had to be written by hand.
+Extracted from components built for a crypto wallet platform, where shared hosting ruled out running a Node or Geth process and the available PHP web3 wrappers were either abandoned or too heavy. This repository is new — the code has been exercised against BSC and Polygon, but treat it as `0.x` and read the [scope and limitations](#scope-and-limitations) before using it with real funds.
 
 ## What's in it
 
@@ -50,6 +50,10 @@ Address history across Ethereum, BSC and Polygon with layered fallbacks, because
 Includes arbitrary-precision hex→decimal and decimal-shift helpers (GMP with a pure-PHP fallback), since token amounts routinely exceed PHP's integer range.
 
 ## Usage
+
+> ⚠️ **This library signs real transactions with real private keys.** Never hard-code, commit, or log a private key. Load it from an environment variable or a secrets manager, and keep it out of version control and error logs. The examples below use placeholders.
+>
+> **Amount units:** functions taking a human amount (`evmSendToken`, `evmSendNative`, `evmVerifyPayment`) expect a *decimal string* — `'10.5'`, not wei. Functions ending in `Wei` (`evmTokenTransferData`, `evmSignTx`) expect the *integer wei string* — `'10500000'`. Passing one where the other is expected is silent and expensive; `evmToWei()` converts between them.
 
 ```php
 require_once 'src/EvmHelpers.php';

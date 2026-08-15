@@ -1,5 +1,5 @@
 {
-    "name": "presh/php-evm-toolkit",
+    "name": "marketwizardhq/php-evm-toolkit",
     "description": "Low-level EVM utilities for PHP — RLP encoding, EIP-155 transaction signing, ABI codec, contract deployment, and on-chain payment verification. No web3 library required.",
     "type": "library",
     "keywords": ["ethereum", "evm", "bsc", "polygon", "rlp", "eip-155", "erc20", "blockchain", "php"],
