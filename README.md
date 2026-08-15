@@ -96,6 +96,20 @@ define('EVM_CA_BUNDLE', '/path/to/cacert.pem'); // https://curl.se/ca/cacert.pem
 
 `EVM_INSECURE_TLS` exists only for local development against a self-signed node.
 
+## Trust model
+
+Worth stating plainly, because it decides how much this library can promise:
+
+**`evmVerifyPayment()` is only as trustworthy as the RPC endpoint answering it.** It re-derives nothing from consensus — it asks a node for a receipt and reads the reply. A node that lies (compromised, malicious, or impersonated over an unverified connection) can report a successful transfer that never happened, and this library will believe it. TLS verification closes the impersonation route; it does not make an untrustworthy node trustworthy.
+
+Practical consequences:
+
+- The defaults in `evmChainConfig()` are **public community endpoints**. They are fine for reads and for development. For anything holding real value, run your own node or use a provider you have an agreement with.
+- Verification reflects **one node's view at one moment**. It does not wait for finality. For high-value payments, require a confirmation depth appropriate to the chain before treating a payment as settled.
+- Multiple endpoints are tried in order until one answers (`evmRpcCallAny`); results are **not** cross-checked between them. That is failover, not consensus.
+
+None of this is unusual — every off-chain payment integration inherits it — but a library that decides whether money arrived should say so out loud rather than let you assume otherwise.
+
 ## Scope and limitations
 
 Being straightforward about what this is:
